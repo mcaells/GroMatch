@@ -1,25 +1,38 @@
 # GroMatch: Smart Grocery Budget & Recipe Matcher
 
-## Deskripsi Proyek
-GroMatch adalah aplikasi web fullstack yang dirancang untuk menjawab permasalahan sehari-hari: "Hari ini bisa masak apa dengan uang Rp X?". Aplikasi ini membantu anak kos, mahasiswa, atau ibu rumah tangga untuk menemukan resep masakan yang sesuai dengan anggaran (budget) harian mereka, menggunakan kalkulasi harga bahan pokok yang disinkronisasi dengan data harga pasar real-time.
+## Masalah Nyata yang Akan Diselesaikan
+Banyak orang, terutama anak kos dan ibu rumah tangga, sering kebingungan menentukan menu masakan harian yang pas dengan sisa uang di dompet. Tanpa perencanaan, mereka sering kali membeli bahan makanan secara impulsif yang berujung pada pengeluaran overbudget atau makanan yang terbuang (food waste). Belum ada aplikasi pencari resep yang secara otomatis menyaring hasil masakannya berdasarkan batasan Rupiah yang dimiliki pengguna secara realistis.
 
-Proyek ini dikembangkan sebagai pemenuhan tugas individu untuk mata kuliah Rekayasa Perangkat Lunak (Semester 3), Program Studi Information Technology di Pradita University.
+## Profil Target Pengguna
+- Mahasiswa / Anak Kos: Memiliki anggaran makan harian atau mingguan yang sangat ketat dan butuh resep praktis.
+- Ibu Rumah Tangga Muda: Membutuhkan variasi menu keluarga tanpa melebihi uang belanja bulanan.
+- Pekerja Entry-Level: Ingin berhemat dengan membawa bekal masak sendiri dari rumah, namun tidak punya banyak waktu untuk riset harga bahan di pasar.
 
-## Fitur Utama
-- Budget-Based Recipe Matching: Pencarian resep yang difilter secara otomatis berdasarkan limitasi anggaran (Rupiah) yang diinput oleh pengguna.
-- Estimated Cost Calculation: Kalkulasi estimasi harga bahan baku berdasarkan database internal harga rata-rata bahan pokok lokal (per gram/porsi).
-- Auto-Generated Shopping List: Menghasilkan daftar belanja spesifik (lengkap dengan takaran) dari resep yang dipilih.
-- Dietary & Ingredient Filters: Opsi untuk menyaring resep berdasarkan bahan yang sudah ada di kulkas atau alergi tertentu.
+## Manfaat Aplikasi
+- Efisiensi Finansial: Mencegah pengeluaran overbudget karena pengguna hanya melihat resep yang mampu mereka beli.
+- Menghemat Waktu: Menghilangkan kebingungan "hari ini masak apa ya?" dengan memberikan rekomendasi instan beserta takaran bahannya.
+- Manajemen Belanja Terstruktur: Menghasilkan daftar belanja (shopping list) otomatis yang mempermudah proses belanja di pasar atau supermarket.
 
-## User Flow
-- Input Anggaran: Pengguna membuka aplikasi dan memasukkan budget yang dimiliki (misal: Rp 30.000) beserta target jumlah porsi.
-- Kustomisasi: Pengguna memasukkan filter tambahan jika diperlukan (misal: "olahan ayam", "tanpa santan").
-- Pencocokan: Sistem menarik data resep, mengkalkulasi estimasi harga setiap komponen bahan melalui database lokal, dan menampilkan 3-5 opsi masakan yang total pengeluarannya masuk dalam budget.
--  Eksekusi: Pengguna memilih salah satu resep. Aplikasi akan menampilkan instruksi memasak sekaligus checklist daftar belanja interaktif.
+## Daftar Fitur Inti
+- Budget & Portion Input: Formulir bagi pengguna untuk memasukkan maksimal anggaran (dalam Rupiah) dan jumlah porsi yang diinginkan.
+- Recipe Matching Engine: Mesin pencari yang mengkalkulasi harga bahan baku dari database harga rata-rata lokal dan membandingkannya dengan resep dari Spoonacular API.
+- Dietary Filters: Fitur penyaring resep berdasarkan preferensi atau alergi (misal: "tanpa kacang", "olahan ayam").
+- Auto-Shopping List: Generator daftar belanja interaktif berdasarkan resep yang dipilih.
+- User Management (CRUD): Fitur pendaftaran akun, login, dan kemampuan menyimpan (save/bookmark) resep favorit ke dalam profil pengguna (menggunakan database MySQL).
+
+## Fitur yang Tidak Dikerjakan (Out of Scope)
+- Integrasi Harga Pasar Real-Time: Aplikasi tidak akan menarik data harga secara real-time dari API pemerintah karena kendala stabilitas server publik. Harga yang digunakan adalah harga estimasi rata-rata yang disimpan secara statis di database internal.
+- E-Commerce / Delivery Bahan Makanan: Aplikasi murni berfungsi sebagai perencana belanja dan resep. Tidak ada fitur pemesanan atau pengantaran bahan makanan via kurir (seperti integrasi GoMart/GrabMart).
+- Payment Gateway: Tidak ada sistem transaksi keuangan di dalam aplikasi.
+
+## Kriteria Aplikasi Dinyatakan Berhasil
+- Aplikasi berhasil memfilter dan menampilkan minimal 3 rekomendasi resep yang total estimasi harga bahannya tidak melebihi budget yang diinput pengguna.
+- Kalkulasi harga berjalan logis: Sistem berhasil mengonversi takaran bahan dari API (misal: 100 gram bawang) dikalikan dengan data harga di MySQL, lalu menampilkan total estimasinya ke layar.
+- Fungsi integrasi API eksternal berjalan baik: Dapat menarik gambar, instruksi memasak, dan komposisi dari Spoonacular API tanpa error.
+- Fungsi Database berjalan baik: Pengguna dapat membuat akun, menyimpan resep, dan melihat kembali daftar resep favorit mereka saat melakukan login ulang.
 
 ## Tech Stack & Tools
-- Frontend: HTML, CSS, JavaScript.
-- UI/UX Design: Figma.
-- Backend: Python (Flask) / Java.
-- Database: MySQL (Relational Schema ter-normalisasi hingga 3NF).
-- Version Control: Git & GitHub.
+- Frontend: HTML, CSS, JavaScript (Fetch API)
+- Backend: Python (Flask) / Java
+- Database: MySQL (Relational Schema hingga 3NF)
+- External API: Spoonacular API
